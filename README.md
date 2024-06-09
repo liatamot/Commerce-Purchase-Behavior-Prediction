@@ -28,26 +28,8 @@
 
 - 2024년 3월 8일 ~ 5월 2일
 
-## 2. Components
 
-### Directory
-
-```
-├── code
-│   ├── jupyter_notebooks
-│   │   └── model_train.ipynb
-│   └── train.py
-├── docs
-│   ├── pdf
-│   │   └── (Template) [패스트캠퍼스] Upstage AI Lab 1기_그룹 스터디 .pptx
-│   └── paper
-└── input
-    └── data
-        ├── eval
-        └── train
-```
-
-## 3. Data descrption
+## 2. Data descrption
 
 ### Dataset overview
 
@@ -83,7 +65,7 @@
 - purchase 관련 데이터를 기반으로 User-Item relevance, User-Item Matrix를 만들기 위한 Preprocessing & Feature Engineering을 진행하였음
 - XGBoost, LGBM, Implicit, Recbole 등의 라이브러리들을 활용하여 추천 시스템 구축하였음
 
-## 4. Modeling
+## 3. Modeling
 
 ### Model descrition
 
@@ -98,7 +80,7 @@
 
 
 
-## 5. Result
+## 4. Result
 
 ### Leader Board
 
