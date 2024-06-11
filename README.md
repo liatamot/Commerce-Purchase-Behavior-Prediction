@@ -6,7 +6,6 @@
 |            박성우             |            노균호         |            윤수인             |            조예람             |
 |                         팀장, EDA, Modeling, Ensemble                          |                         EDA, Modeling                   |                        EDA, Modeling                          |                            EDA, Modeling, Ensemble               |
 
-## 0. Overview
 ### Environment
 - Vscode, ssh server(RTX 3090/Ubuntu 20.04.6), pytorch
 
