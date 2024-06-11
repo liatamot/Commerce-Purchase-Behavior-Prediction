@@ -6,6 +6,12 @@
 |            박성우             |            노균호         |            윤수인             |            조예람             |
 |                         팀장, EDA, Modeling, Ensemble                          |                         EDA, Modeling                   |                        EDA, Modeling                          |                            EDA, Modeling, Ensemble               |
 
+### Role
+- 박성우: EDA, sequantial 계열 Model(SASRec, BERT4Rec, GRU4Rec, etc) 구현, EASE 모델 구현 및 RecBole 적용, Voting & Model Ensemble
+- 노균호: EDA, BPT 모델 구현
+- 윤수인: EDA, ALS 모델 구현
+- 조예람: EDA, Tree-Based Model(XGBRanker, LGBMRanker, etc) 구현
+
 ### Environment
 - Vscode, ssh server(RTX 3090/Ubuntu 20.04.6), pytorch
 
@@ -88,19 +94,4 @@
 ### Presentation
 
 - [RecSys 2조.pdf](https://github.com/UpstageAILab/upstage-ai-final-rs2/files/15198368/RecSys.2.pdf)
-
-
-## etc
-
-### Meeting Log
-
-- 매주 월/수/금요일 오후 2시 미팅 진행(총 14회)
-- zoom, slack, Google meet 활용
-
-### Reference
-
-- XGBoost: https://xgboost.readthedocs.io/en/latest/ 
-- GRU4Rec: Gru4rec: https://arxiv.org/abs/1606.08117
-- BERT4Rec: https://arxiv.org/abs/1904.06690 
-- SAS4Rec: https://arxiv.org/abs/1808.09781 
 
