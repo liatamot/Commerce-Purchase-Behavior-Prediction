@@ -15,12 +15,6 @@ def main():
     parser.add_argument("--dir_path", default="../data/", type=str)
     parser.add_argument("--output_dir", default="../output/", type=str)
 
-    # model args
-    parser.add_argument("--num_boost_round", type=int, default=100)
-    parser.add_argument("--early_stopping_rounds", type=int, default=10)
-    parser.add_argument("--max_depth", type=int, default=6)
-    parser.add_argument("--learning_rate", type=float, default=0.1)
-
     # train args
     parser.add_argument("--seed", default=42, type=int)
     args = parser.parse_args()
@@ -67,12 +61,20 @@ def main():
 
     params = {
         'objective': 'rank:pairwise',
-        'max_depth': args.max_depth,
-        'learning_rate': args.learning_rate,
+        'alpha': 0.0670,
+        'gamma': 4.6261,
+        'base_score': 0.5627,
+        'colsample_bytree': 0.8785,
+        'subsample': 0.8864,
+        'n_estimators': 350.0,
+        'min_child_weight': 4.8804,
+        'max_depth': 6.0,
+        'learning_rate': 0.0778,
         'eval_metric': 'ndcg',
-        'seed': args.seed
+        'seed': 1000
     }
 
+    
     model = xgb.train(params, train_data, num_boost_round=args.num_boost_round, evals=evals, early_stopping_rounds=args.early_stopping_rounds)
 
     # Generate recommendations
@@ -80,9 +82,13 @@ def main():
     recommendations = []
 
     for user in tqdm(test_users_idx):
-        user_items = [(user, item) for item in all_items]
-        user_items_df = pd.DataFrame(user_items, columns=['user_idx', 'item_idx'])
-        user_items_dmatrix = xgb.DMatrix(user_items_df)
+        user_items = [(user, item, 0) for item in all_items]  # Initialize 'brand', 'price', 'category_code', 'event_type' as 0 for simplicity
+        user_items_df = pd.DataFrame(user_items, columns=['user_idx', 'item_idx', 'label'])
+        
+        # Merge with item features from train_df to get 'brand', 'price', 'category_code', 'event_type'
+        user_items_df = user_items_df.merge(train_df[['item_idx', 'brand', 'price', 'category_code', 'event_type']].drop_duplicates(), on='item_idx', how='left')
+        
+        user_items_dmatrix = xgb.DMatrix(user_items_df[feature_columns])
         user_items_df['score'] = model.predict(user_items_dmatrix)
         user_recommendations = user_items_df.sort_values(by='score', ascending=False).head(10)['item_idx'].values
         recommendations.extend([(user, item) for item in user_recommendations])
@@ -94,7 +100,7 @@ def main():
     outdir = args.output_dir
     if not os.path.exists(outdir):
         os.mkdir(outdir)
-    sub_df.to_csv(os.path.join(outdir, "XGBRanker_output.csv"), index=False)
+    sub_df.to_csv(os.path.join(outdir, "output.csv"), index=False)
 
 if __name__ == "__main__":
     main()
